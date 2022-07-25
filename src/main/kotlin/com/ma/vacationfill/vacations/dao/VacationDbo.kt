@@ -5,7 +5,7 @@ import javax.persistence.*
 
 @Entity
 @Table
-class VacationDbo(
+data class VacationDbo(
     @Id
     @SequenceGenerator(
         name = "vacation_sequence",

@@ -22,8 +22,13 @@ class VacationsJPADatastore(private val repo: VacationsJPARepository,
     }
 
     override fun saveVacation(vacation: Vacation) {
+        val existingVacation = repo.findById(vacation.id).map { converter.convertDbo(it) }
         val vacationDbo = converter.convertDomain(vacation)
-        repo.save(vacationDbo)
+        if (existingVacation.isPresent){
+            repo.save(vacationDbo.copy(id = existingVacation.get().id))
+        }else{
+            repo.save(vacationDbo)
+        }
     }
 }
 

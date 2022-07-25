@@ -14,16 +14,30 @@ class VacationsService(private val datastore: VacationsDatastore) {
     }
 
     fun acceptVacation(vacationId: Long) { // TODO refactor to have request
-        val vacation = datastore.getVacationById(vacationId)
-        if (vacation.isEmpty){
-            throw Exception("No vacation found with Id: [$vacationId]")
-        }
-
-//        repository.save(vacation)
+        val vacation = getVacationOrThrow(vacationId)
+        vacation.accepted()
+        datastore.saveVacation(vacation)
     }
 
     fun rejectVacation(vacationId: Long) { // TODO refactor to have request
-//        repository.save(vacation)
+        val vacation = getVacationOrThrow(vacationId)
+        vacation.rejected()
+        datastore.saveVacation(vacation)
     }
 
+    fun cancelVacation(vacationId: Long) { // TODO refactor to have request
+        // TODO limit to the requester or the employee
+        val vacation = getVacationOrThrow(vacationId)
+        vacation.canceled()
+        datastore.saveVacation(vacation)
+    }
+
+    private fun getVacationOrThrow(vacationId: Long): Vacation {
+        val vacationOptional = datastore.getVacationById(vacationId)
+        if (vacationOptional.isEmpty) {
+            throw Exception("No vacation found with Id: [$vacationId]")
+        }
+        val vacation = vacationOptional.get()
+        return vacation
+    }
 }

@@ -26,6 +26,11 @@ class VacationsController(private val vacationsService: VacationsService) {
     fun rejectVacation(@RequestBody bodyDto: VacationAcceptanceRequestBodyDto) {
         vacationsService.rejectVacation(bodyDto.vacationId)
     }
+
+    @PostMapping(path = ["api/v1/vacations/cancel"])
+    fun cancelVacation(@RequestBody bodyDto: VacationAcceptanceRequestBodyDto) {
+        vacationsService.cancelVacation(bodyDto.vacationId)
+    }
 }
 
 

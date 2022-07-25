@@ -17,7 +17,7 @@ class VacationConfig {
                     id = 1,
                     startDate = LocalDate.of(2022, 5, 22),
                     endDate = LocalDate.of(2022, 5, 24),
-                    state = "PENDING",
+                    state = State.valueOf("PENDING"),
                     type = "ANNUAL",
                     requestedAt = LocalDate.now(),
                 ),
@@ -25,7 +25,7 @@ class VacationConfig {
                     id = 2,
                     startDate = LocalDate.of(2022, 5, 22),
                     endDate = LocalDate.of(2022, 5, 24),
-                    state = "PENDING",
+                    state = State.valueOf("PENDING"),
                     type = "ANNUAL",
                     requestedAt = LocalDate.now(),
                 )

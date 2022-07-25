@@ -8,7 +8,28 @@ class Vacation(
     val id: Long,
     val startDate: LocalDate,
     val endDate: LocalDate,
-    val state: String,
+    state: State,
     val type: String,
     val requestedAt: LocalDate,
-)
+){
+    var state = state
+    private set
+    fun accepted(){
+        state = State.ACCEPTED
+    }
+
+    fun rejected(){
+        state = State.REJECTED
+    }
+
+    fun canceled(){
+        state = State.CANCELED
+    }
+}
+
+enum class State(val string: String){
+    PENDING("PENDING"),
+    ACCEPTED("ACCEPTED"),
+    REJECTED("REJECTED"),
+    CANCELED("CANCELED"),
+}

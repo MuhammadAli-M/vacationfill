@@ -1,5 +1,6 @@
 package com.ma.vacationfill.vacations.dao
 
+import com.ma.vacationfill.vacations.State
 import com.ma.vacationfill.vacations.Vacation
 import org.springframework.stereotype.Component
 
@@ -9,7 +10,7 @@ class VacationDomainDboConverter{
         id = vacation.id,
         startDate = vacation.startDate,
         endDate = vacation.endDate,
-        state = vacation.state,
+        state = vacation.state.toString(),
         type = vacation.type,
         requestedAt = vacation.requestedAt
     )
@@ -18,7 +19,7 @@ class VacationDomainDboConverter{
         id = vacationDbo.id!!,
         startDate = vacationDbo.startDate,
         endDate = vacationDbo.endDate,
-        state = vacationDbo.state,
+        state = State.valueOf(vacationDbo.state),
         type = vacationDbo.type,
         requestedAt = vacationDbo.requestedAt
     )
