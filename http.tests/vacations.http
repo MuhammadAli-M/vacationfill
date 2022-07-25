@@ -1,0 +1,15 @@
+###
+POST http://localhost:8080/api/v1/vacations
+Content-Type: application/json
+
+{
+"startDate": "2022-07-30",
+"endDate": "2022-07-31",
+"state": "PENDING",
+"type": "SICK",
+"requestedAt": "2022-07-25"
+}
+
+###
+GET http://localhost:8080/api/v1/vacations
+Content-Type: application/json
