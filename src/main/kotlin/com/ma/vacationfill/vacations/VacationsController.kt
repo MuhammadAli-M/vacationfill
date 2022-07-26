@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
+import java.time.LocalDate
 
 @RestController
 class VacationsController(private val vacationsService: VacationsService) {
@@ -13,9 +14,16 @@ class VacationsController(private val vacationsService: VacationsService) {
     fun getVacations(): List<Vacation> = vacationsService.getVacations()
 
     @PostMapping(path = ["api/v1/vacations"])
-    fun addVacation(@RequestBody vacation: Vacation) {
+    fun submitVacation(@RequestBody requestBodyDto: VacationSubmissionRequestBodyDto) {
         // Add validations
-        vacationsService.submitVacation(vacation)
+        if (requestBodyDto.startDate < LocalDate.now() || requestBodyDto.endDate < LocalDate.now()){
+            throw RuntimeException("Vacation start and end date should be in the future")
+        }
+
+        if (requestBodyDto.startDate > requestBodyDto.endDate){
+            throw RuntimeException("Vacation end date should be after its start date")
+        }
+        vacationsService.submitVacation(requestBodyDto.startDate, requestBodyDto.endDate, requestBodyDto.type)
     }
 
     @PostMapping(path = ["api/v1/vacations/{vacationId}/accept"])
@@ -35,6 +43,8 @@ class VacationsController(private val vacationsService: VacationsService) {
 }
 
 
-data class VacationAcceptanceRequestBodyDto(
-    val vacationId: Long
+data class VacationSubmissionRequestBodyDto(
+    val startDate: LocalDate,
+    val endDate: LocalDate,
+    val type: String,
 )

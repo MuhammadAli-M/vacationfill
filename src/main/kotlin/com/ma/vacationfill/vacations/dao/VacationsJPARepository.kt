@@ -21,13 +21,17 @@ class VacationsJPADatastore(private val repo: VacationsJPARepository,
         return repo.findAll().map { converter.convertDbo(it) }
     }
 
-    override fun saveVacation(vacation: Vacation) {
-        val existingVacation = repo.findById(vacation.id).map { converter.convertDbo(it) }
-        val vacationDbo = converter.convertDomain(vacation)
-        if (existingVacation.isPresent){
-            repo.save(vacationDbo.copy(id = existingVacation.get().id))
+    override fun saveVacation(vacation: Vacation) { // insert and save together
+        if (vacation.id != null){
+            val existingVacation = repo.findById(vacation.id).map { converter.convertDbo(it) }
+            val vacationDbo = converter.convertDomain(vacation)
+            if (existingVacation.isPresent){
+                repo.save(vacationDbo.copy(id = existingVacation.get().id))
+            }else{
+                repo.save(vacationDbo)
+            }
         }else{
-            repo.save(vacationDbo)
+            repo.save(converter.convertDomain(vacation))
         }
     }
 }

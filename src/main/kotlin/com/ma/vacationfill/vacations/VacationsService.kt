@@ -1,6 +1,7 @@
 package com.ma.vacationfill.vacations
 
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class VacationsService(private val datastore: VacationsDatastore) {
@@ -9,7 +10,8 @@ class VacationsService(private val datastore: VacationsDatastore) {
         return datastore.getAllVacations()
     }
 
-    fun submitVacation(vacation: Vacation) {
+    fun submitVacation(startDate: LocalDate, endDate: LocalDate, type: String) {
+        val vacation = Vacation.new(startDate,endDate,type)
         datastore.saveVacation(vacation)
     }
 

@@ -1,33 +1,45 @@
 package com.ma.vacationfill.vacations
 
 import java.time.LocalDate
-import java.time.LocalTime
-import javax.persistence.*
 
 class Vacation(
-    val id: Long,
+    val id: Long? = null,
     val startDate: LocalDate,
     val endDate: LocalDate,
-    state: State,
+    state: VacationState,
     val type: String,
     val requestedAt: LocalDate,
 ){
     var state = state
     private set
+
+    companion object{
+        fun new(
+            startDate: LocalDate,
+            endDate: LocalDate,
+            type: String,
+        ) = Vacation(
+            startDate = startDate,
+            endDate = endDate,
+            type = type,
+            state = VacationState.PENDING,
+            requestedAt = LocalDate.now()
+        )
+    }
     fun accepted(){
-        state = State.ACCEPTED
+        state = VacationState.ACCEPTED
     }
 
     fun rejected(){
-        state = State.REJECTED
+        state = VacationState.REJECTED
     }
 
     fun canceled(){
-        state = State.CANCELED
+        state = VacationState.CANCELED
     }
 }
 
-enum class State(val string: String){
+enum class VacationState(val string: String){
     PENDING("PENDING"),
     ACCEPTED("ACCEPTED"),
     REJECTED("REJECTED"),

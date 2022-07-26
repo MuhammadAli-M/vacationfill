@@ -1,7 +1,6 @@
 package com.ma.vacationfill.vacations
 
 import com.ma.vacationfill.vacations.dao.VacationsJPADatastore
-import com.ma.vacationfill.vacations.dao.VacationsJPARepository
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -17,7 +16,7 @@ class VacationConfig {
                     id = 1,
                     startDate = LocalDate.of(2022, 5, 22),
                     endDate = LocalDate.of(2022, 5, 24),
-                    state = State.valueOf("PENDING"),
+                    state = VacationState.valueOf("PENDING"),
                     type = "ANNUAL",
                     requestedAt = LocalDate.now(),
                 ),
@@ -25,7 +24,7 @@ class VacationConfig {
                     id = 2,
                     startDate = LocalDate.of(2022, 5, 22),
                     endDate = LocalDate.of(2022, 5, 24),
-                    state = State.valueOf("PENDING"),
+                    state = VacationState.valueOf("PENDING"),
                     type = "ANNUAL",
                     requestedAt = LocalDate.now(),
                 )
