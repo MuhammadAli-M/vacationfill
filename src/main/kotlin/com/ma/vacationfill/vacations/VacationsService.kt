@@ -35,9 +35,9 @@ class VacationsService(private val datastore: VacationsDatastore) {
     private fun getVacationOrThrow(vacationId: Long): Vacation {
         val vacationOptional = datastore.getVacationById(vacationId)
         if (vacationOptional.isEmpty) {
-            throw Exception("No vacation found with Id: [$vacationId]")
+            throw NoVacationFoundException(vacationId)
         }
-        val vacation = vacationOptional.get()
-        return vacation
+        return vacationOptional.get()
     }
 }
+class NoVacationFoundException(private val vacationId: Long) : RuntimeException("No vacation found with Id: [$vacationId]")
