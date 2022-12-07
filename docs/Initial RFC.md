@@ -51,10 +51,12 @@ Regarding roles, we start as simple roles them we can extend to have roles and p
 
 ### Vacations
 ```
-/vacations/new                  [Post]
+/vacations                      [Post]
 /vacations/:id/reject           [Post]
 /vacations/:id/accept           [Post]
-/vacations/:employeeId          [Get]
+/vacations/:id/cancel           [Post]
+/vacations                      [Get]
+/vacations/:vacationId          [Get]
 ```
 
 ## Architecture
