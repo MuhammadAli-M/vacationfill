@@ -1,6 +1,6 @@
 package com.ma.vacationfill.vacations
 
-import com.ma.vacationfill.vacations.dao.VacationsJPADatastore
+import com.ma.vacationfill.vacations.infrastructure.dao.VacationsJPARepo
 import org.springframework.boot.CommandLineRunner
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
@@ -9,7 +9,7 @@ import java.time.LocalDate
 @Configuration
 class VacationConfig {
     @Bean
-    fun commandLineRunner(repository: VacationsJPADatastore): CommandLineRunner{
+    fun commandLineRunner(repository: VacationsJPARepo): CommandLineRunner{
         return CommandLineRunner {
             val vacations = listOf(
                 Vacation(
@@ -17,7 +17,7 @@ class VacationConfig {
                     startDate = LocalDate.of(2022, 5, 22),
                     endDate = LocalDate.of(2022, 5, 24),
                     state = VacationState.valueOf("PENDING"),
-                    type = "ANNUAL",
+                    type = VacationType.ANNUAL,
                     requestedAt = LocalDate.now(),
                 ),
                 Vacation(
@@ -25,7 +25,7 @@ class VacationConfig {
                     startDate = LocalDate.of(2022, 5, 22),
                     endDate = LocalDate.of(2022, 5, 24),
                     state = VacationState.valueOf("PENDING"),
-                    type = "ANNUAL",
+                    type = VacationType.ANNUAL,
                     requestedAt = LocalDate.now(),
                 )
             )

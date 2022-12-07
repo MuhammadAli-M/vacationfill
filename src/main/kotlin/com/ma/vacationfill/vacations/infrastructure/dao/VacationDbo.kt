@@ -1,10 +1,10 @@
-package com.ma.vacationfill.vacations.dao
+package com.ma.vacationfill.vacations.infrastructure.dao
 
 import java.time.LocalDate
 import javax.persistence.*
 
 @Entity
-@Table
+@Table(name = "vacations")
 data class VacationDbo(
     @Id
     @SequenceGenerator(

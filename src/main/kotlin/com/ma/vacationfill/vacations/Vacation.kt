@@ -7,7 +7,7 @@ class Vacation(
     val startDate: LocalDate,
     val endDate: LocalDate,
     state: VacationState,
-    val type: String,
+    val type: VacationType,
     val requestedAt: LocalDate,
 ){
     var state = state
@@ -17,7 +17,7 @@ class Vacation(
         fun new(
             startDate: LocalDate,
             endDate: LocalDate,
-            type: String,
+            type: VacationType,
         ) = Vacation(
             startDate = startDate,
             endDate = endDate,
@@ -44,4 +44,11 @@ enum class VacationState(val string: String){
     ACCEPTED("ACCEPTED"),
     REJECTED("REJECTED"),
     CANCELED("CANCELED"),
+}
+
+
+enum class VacationType(val string: String){
+    ANNUAL("ANNUAL"),
+    SICK("SICK"),
+    CAUSAL("CAUSAL"),
 }
