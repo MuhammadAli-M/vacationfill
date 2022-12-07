@@ -1,15 +1,31 @@
-###
-POST http://localhost:8080/api/v1/vacations
+### Submit a vacation
+POST http://{{host}}/api/v1/vacations
 Content-Type: application/json
 
 {
-"startDate": "2022-07-30",
-"endDate": "2022-07-31",
+"startDate": "2023-01-05",
+"endDate": "2023-01-06",
 "state": "PENDING",
 "type": "SICK",
-"requestedAt": "2022-07-25"
+"requestedAt": "2022-12-06"
 }
 
-###
-GET http://localhost:8080/api/v1/vacations
+### Accept a vacation
+POST http://{{host}}/api/v1/vacations/4/accept
+Content-Type: application/json
+
+### Reject a vacation
+POST http://{{host}}/api/v1/vacations/5/reject
+Content-Type: application/json
+
+### Cancel a vacation
+POST http://{{host}}/api/v1/vacations/6/cancel
+Content-Type: application/json
+
+### Get all vacations
+GET http://{{host}}/api/v1/vacations
+Content-Type: application/json
+
+### Get vacation by Id
+GET http://{{host}}/api/v1/vacations/2
 Content-Type: application/json
